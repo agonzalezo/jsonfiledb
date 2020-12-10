@@ -1,3 +1,5 @@
+const { resolve } = require("path");
+
 const
     path = require("path"),
     fs = require("fs"),
@@ -20,6 +22,21 @@ mydb.getall = () => {
     })
 }
 //#endregion
+
+//#region Consulta la BD y filtra por un campo ID.
+mydb.getone = (id)=>{
+    return new Promise((resolve, rejec)=>{
+        fs.readFile(db_path, "utf-8", (err,data)=>{
+            if (err) return rejec(err);
+            data = JSON.parse(data);
+            data = data.filter(user => user.id === id);
+            if (data.length > 0) {
+                return resolve(data);
+            }
+            return rejec(`El ID {${id}} no se encontro en la base de datos`);
+        })
+    })
+}
 
 //#region Insertar un objeto JSON sin parsear
 mydb.insert = (obj_json) => {
