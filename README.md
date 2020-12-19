@@ -30,3 +30,12 @@ insert(myjson)
     .catch((error)=>{
         console.log(error)
     })
+
+/Obtener un objeto por el campo ID.
+getone(1)
+    .then((usuario)=>{
+        console.log("datos encontrados\n",usuario)
+    })
+    .catch((error)=>{
+        console.log("Error en la consulta\n",error)
+    })
